@@ -175,7 +175,7 @@
   \el: restriction to constructors $\exists r.A$ and $\sqcap$
   \begin{itemize}
     \item turns out to be expressive enough in many cases (\mbox{e.g.} medical knowledge bases)
-    \item extensions: concrete domains, fixpoint operators, $\bot$, $\dots$
+    \item extensions: role hierarchies, fixpoint operators, $\bot$, $\dots$
     \item polynomial reasoning
     \item finite model property 
     \item \emph{convex logic}: $C\sqsubseteq D_1\sqcup D_2$ implies $C\sqsubseteq D_1$ or $C\sqsubseteq D_2$
@@ -197,9 +197,9 @@
 
 \begin{frame}
   \frametitle{Attempt 1 -- $P_{>0}C$ and $P_{>0.4}C$}
-  We add the constructors \emph{$P_{>0}C$} and \emph{$P_{>0.4}A$}. 
+%   We add the constructors \emph{$P_{>0}C$} and \emph{$P_{>0.4}A$}. 
 
-  Consider now the KB $\mathcal K=(\mathcal T, \{C(a)\})$ with $\mathcal T$: 
+  Consider the KB $\mathcal K=(\mathcal T, \{C(a)\})$ with $\mathcal T$: 
   \begin{align*}
     C &\equiv P_{>0.4}A_1\sqcap P_{>0.4}A_2\sqcap P_{>0.4}A_3 \\
     D_1 &\equiv P_{>0}(A_1\sqcap A_2) \\
@@ -251,7 +251,7 @@
   Many interesting combinations of $\el$ with 
   probabilistic operators lead to intractable reasoning. 
 
-  We found only three possible settings:
+  Three possible settings:
 
   \begin{enumerate}
     \item restriction to ``normal'' TBoxes + $P_{>p}C$ for one probabilty $p$
@@ -276,13 +276,22 @@
   \frametitle{The logic $S5_{\el}$}
   \begin{itemize}
     \item two-dimensional logic with possible world semantics
-    \item $\Diamond C$ roughly $P_{>0}C$
-    \item $\exists\Diamond r.C$ roughly $\exists P_{>0}r.C$
+    \item $\Diamond C$ roughly $P_{>0}C$ and $\exists\Diamond r.C$ roughly $\exists P_{>0}r.C$
     \item ``roughly'': worlds with probability zero
     \item \pspace algorithm for instance checking in $S5_{\el}$
     \item we believe that with a similar technique we get an algorithm for the corresponding \el-variant
   \end{itemize}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Conclusions and future directions}
+  \begin{itemize}
+    \item more careful analysis of statistical semantics
+    \item how to convert from statistical to subjective semantics, \mbox{i.e.} how to get \emph{degree of belief} from statistical knowledge
+  \end{itemize}
+\end{frame}
+
+
 \begin{frame}
   \frametitle{Relevant References}
   \begin{scriptsize}
