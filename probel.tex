@@ -47,18 +47,23 @@
 
 
 \begin{frame}
-	\frametitle{Description Logics}
-	\begin{itemize}
-		\item family of logics to describe terminological knowledge
-		\item decidable fragments of FOL
-		\item 
-			Concepts:	$C: :=\top~|~A~|~\neg C~|~C_1\sqcap C_2~|~\exists r.C~|~\ldots$
-		\item 
-			terminological knowledge (TBox): set of GCIs $C\sqsubseteq D$
-		\item
-			instance knowledge (ABox): set of assertions $C(a)$, $r(a,b)$
-	\end{itemize}
-	\textbf{EXAMPLE for DL}
+  \frametitle{Description Logics}
+  \begin{itemize}
+    \item family of logics to describe terminological knowledge
+    \item decidable fragments of FOL
+    \item 
+      Concepts:	$C: :=\top~|~A~|~\neg C~|~C_1\sqcap C_2~|~\exists r.C~|~\ldots$
+    \item 
+      terminological knowledge (TBox): set of GCIs $C\sqsubseteq D$
+    \item
+      instance knowledge (ABox): set of assertions $C(a)$, $r(a,b)$
+  \end{itemize}
+  \emph{Example}
+  \begin{align*}
+    Mother &\sqsubseteq Female\sqcap\exists child.\top \\
+    Parent &\equiv Mother\sqcup Father \\
+    GrandMother &\sqsubseteq Mother \sqcap\exists child.Parent
+  \end{align*}
 \end{frame}
 
 
@@ -152,15 +157,16 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Worlds with probability zero}
-	\begin{itemize}
-		\item takes time getting used to it
-		\item philosophical justification: \\
-			\emph{logically} contradictory $\Longleftrightarrow$ infinitely improbable
-		\item restriction to one world with probability 0 possible
-		\item difference between $\Box C$ and $P_{=1}C$, \mbox{e.g.}, no direct reduction from $S5_{\alc}$
-			to Prob-$\alc^{01}$ possible
-	\end{itemize}
+  \frametitle{Worlds with probability zero}
+  \begin{itemize}
+    \item takes time getting used to it
+    \item philosophical justification: \\
+      logically contradictory \emph{$\Longleftrightarrow$} infinitely improbable
+    \item special behaviour, since probabilistic operators range only over worlds $w$ with $Pr(w)>0$
+    \item often: restriction to one world with probability 0 possible
+    \item difference between $\Box C$ and $P_{=1}C$, \mbox{e.g.}, no direct reduction from $S5_{\alc}$
+      to Prob-$\alc^{01}$ possible
+  \end{itemize}
 \end{frame}
 
 
