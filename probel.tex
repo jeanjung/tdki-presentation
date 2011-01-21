@@ -1,5 +1,5 @@
-\documentclass[draft]{beamer}
-% \documentclass{beamer}
+% \documentclass[draft]{beamer}
+\documentclass{beamer}
 
 \usepackage{tikz}
 \usepackage{pgf}
@@ -68,92 +68,106 @@
 
 
 \begin{frame}
-	\frametitle{Semantics}
-	given by interpretations $\I=(\Delta,\cdot^{\I})$
-	\begin{itemize}
-		\item domain $\Delta$, set of individuals
-		\item concept names: $A^{\I}\subseteq\Delta$
-		\item conjunction: $(C_1\sqcap C_2)^{\I}=C_1^{\I}\cap C_2^{\I}$
-		\item negation: $(\neg C)^{\I}=\Delta\setminus C^{\I}$
-		\item roles: $r^{\I}\subseteq\Delta\times\Delta$
-		\item existential restrictions: $(\exists r.C)^{\I}=\{d\in\Delta~|~\exists e\in C^{\I}.(d,e)\in r^{\I}\}$
-	\end{itemize}
+  \frametitle{Semantics}
+  given by interpretations $\I=(\Delta,\cdot^{\I})$
+  \begin{itemize}
+    \item domain $\Delta$, set of individuals
+    \item concept names: $A^{\I}\subseteq\Delta$
+    \item conjunction: $(C_1\sqcap C_2)^{\I}=C_1^{\I}\cap C_2^{\I}$
+    \item negation: $(\neg C)^{\I}=\Delta\setminus C^{\I}$
+    \item roles: $r^{\I}\subseteq\Delta\times\Delta$
+    \item existential restrictions: $(\exists r.C)^{\I}=\{d\in\Delta~|~\exists e\in C^{\I}.(d,e)\in r^{\I}\}$
+  \end{itemize}
 \end{frame}
 
 
 \begin{frame}
-	\frametitle{Semantics for Probability}
-	\begin{itemize}
-		\item important problem in philosophy: mathematical, classical, subjective, frequency, $\ldots$
-		\item desired: formal semantics for probabilities
-		\item FOL: statistical vs. subjective interpretation \cite{halpern}
-		\item probability distribution on the domain vs. \emph{possible world semantics}
-	\end{itemize}
+  \frametitle{Reasoning in \el}
+  \el: restriction to constructors $\exists r.A$ and $\sqcap$
+  \begin{itemize}
+    \item turns out to be expressive enough in many cases (\mbox{e.g.} medical knowledge bases)
+    \item \emph{polynomial} reasoning
+    \item extensions: role hierarchies, fixpoint operators, $\bot$, $\dots$
+    \item finite model property 
+    \item \emph{convex logic}: $C\sqsubseteq D_1\sqcup D_2$ implies $C\sqsubseteq D_1$ or $C\sqsubseteq D_2$
+  \end{itemize}
+  important observation: \emph{non-convex} extensions of \el are as hard as the corresponding variant of \alc.
 \end{frame}
 
 
 \begin{frame}
-	\frametitle{Possible World Semantics}
-	\begin{itemize}
-		\item additional concept constructors $P_{\geq p}C$, $\exists P_{\geq p}r.C$
-		\item extend DL-interpretation with a set of worlds
-		\item probability distribution on the worlds % (including 0-worlds)
-		\item concept \& role names are interpreted locally: $A^{\I,w}$, $r^{\I,w}$
-		\item interpretation of new constructors:
-			$$(P_{\geq p}C)^{\I,w}=\{d\in\Delta~|~\sum_{v:d\in C^{\I,v}}Pr(v)\geq p\}$$
-			$$(\exists P_{\geq p}C)^{\I,w}=\{d\in\Delta~|~\exists e\in C^{\I,w}.\sum_{v:(d,e)\in r^{\I,v}}Pr(v)\geq p\}$$
-	\end{itemize}
+  \frametitle{Semantics for Probabilities}
+  \begin{itemize}
+    \item important problem in philosophy: mathematical, classical, subjective, frequency, $\ldots$
+    \item desired: formal semantics for probabilities
+    \item FOL: statistical vs. subjective interpretation \cite{halpern}
+    \item probability distribution on the domain vs. \emph{possible world semantics}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Possible World Semantics}
+  \begin{itemize}
+    \item additional concept constructors $P_{\geq p}C$, $\exists P_{\geq p}r.C$
+    \item extend DL-interpretation with a set of worlds
+    \item probability distribution on the worlds % (including 0-worlds)
+    \item concept \& role names are interpreted locally: $A^{\I,w}$, $r^{\I,w}$
+    \item interpretation of new constructors:
+      $$(P_{\geq p}C)^{\I,w}=\{d\in\Delta~|~\sum_{v:d\in C^{\I,v}}Pr(v)\geq p\}$$
+      $$(\exists P_{\geq p}C)^{\I,w}=\{d\in\Delta~|~\exists e\in C^{\I,w}.\sum_{v:(d,e)\in r^{\I,v}}Pr(v)\geq p\}$$
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Possible World Semantics -- Example}
-	\begin{tikzpicture}[
-		indi/.style={
-           circle,
-           draw=black, 
-					 fill=black,
-					 inner sep=.05cm
-					 }]
-% 		\draw [help lines] (0,0) grid (10, 6);
+  \frametitle{Possible World Semantics -- Example}
+  \begin{tikzpicture}[
+    indi/.style={
+    circle,
+    draw=black, 
+    fill=black,
+    inner sep=.05cm
+    }]
+    % 		\draw [help lines] (0,0) grid (10, 6);
 
-		\node at (1.5,5.5) {$w_0$};
-		\node at (4.5,5.5) {$w_1$};
-		\node at (7.5,5.5) {$w_2$};
-		\draw (1.5,3) ellipse (1 and 2); 
-		\draw (4.5,3) ellipse (1 and 2);
-		\draw (7.5,3) ellipse (1 and 2);
-		\node[indi,label=above:$A$] at (1.5,4) (a01) {};
-		\node[indi] at (1,2) 	 (a02) {};
-		\node[indi] at (2,2) 	 (a03) {};
-		\node[indi] at (4.5,4) (a11) {};
-		\node[indi,label=above left:$B$] at (4,2)   (a12) {};
-		\node[indi] at (5,2)   (a13) {};
-		\node[indi] at (7.5,4) (a21) {};
-		\node[indi,label=above left:$B$] at (7,2) 	 (a22) {};
-		\node[indi,label=above right:$C$] at (8,2)   (a23) {};
-		\draw[->] (a01) -- (a02);
-		\draw[->] (a02) -- (a03);
-		\draw[->] (a11) -- (a13);
-		\draw[->] (a21) -- (a23);
-		\draw[->] (a11) -- (a12);
-		\draw[->] (a13) -- (a12);
-		\pause
-		\node at (1.5, 0.5) {$Pr(w_0)=0$};
-		\node at (4.5, 0.5) {$Pr(w_1)=0.3$};
-		\node at (7.5, 0.5) {$Pr(w_2)=0.7$};
-		\pause
-		\node[red, below] at (a02.south) {$P_{=1}B$};
-		\node[red, below] at (a03.south) {$P_{>0}C$};
-		\pause
-		\node[red, below] at (a12.west) {$P_{=1}B$};
-		\node[red, below] at (a22.west) {$P_{=1}B$};
-		\node[red, below] at (a13.south) {$P_{>0}C$};
-		\node[red, below] at (a23.south) {$P_{>0}C$};
-		\pause
-		\node[blue, above] at (a11.north) {$\exists P_{>0.2} r.B$};
-		\pause
-		\node[blue, above] at (a21.north) {$\exists P_{>0.9} r.C$};
-	\end{tikzpicture}
+    \node at (1.5,5.5) {$w_0$};
+    \node at (4.5,5.5) {$w_1$};
+    \node at (7.5,5.5) {$w_2$};
+    \draw (1.5,3) ellipse (1 and 2); 
+    \draw (4.5,3) ellipse (1 and 2);
+    \draw (7.5,3) ellipse (1 and 2);
+    \node[indi,label=above:$A$] at (1.5,4) (a01) {};
+    \node[indi] at (1,2) 	 (a02) {};
+    \node[indi] at (2,2) 	 (a03) {};
+    \node[indi] at (4.5,4) (a11) {};
+    \node[indi,label=above left:$B$] at (4,2)   (a12) {};
+    \node[indi] at (5,2)   (a13) {};
+    \node[indi] at (7.5,4) (a21) {};
+    \node[indi,label=above left:$B$] at (7,2) 	 (a22) {};
+    \node[indi,label=above right:$C$] at (8,2)   (a23) {};
+    \draw[->] (a01) -- (a02);
+    \draw[->] (a02) -- (a03);
+    \draw[->] (a11) -- (a13);
+    \draw[->] (a21) -- (a23);
+    \draw[->] (a11) -- (a12);
+    \draw[->] (a13) -- (a12);
+    \pause
+    \node at (1.5, 0.5) {$Pr(w_0)=0$};
+    \node at (4.5, 0.5) {$Pr(w_1)=0.3$};
+    \node at (7.5, 0.5) {$Pr(w_2)=0.7$};
+    \pause
+    \node[red, below] at (a02.south) {$P_{=1}B$};
+    \node[red, below] at (a03.south) {$P_{>0}C$};
+    \pause
+    \node[red, below] at (a12.west) {$P_{=1}B$};
+    \node[red, below] at (a22.west) {$P_{=1}B$};
+    \node[red, below] at (a13.south) {$P_{>0}C$};
+    \node[red, below] at (a23.south) {$P_{>0}C$};
+    \pause
+    \node[blue, above] at (a11.north) {$\exists P_{>0.2} r.B$};
+    \pause
+    \node[blue, above] at (a21.north) {$\exists P_{>0.9} r.C$};
+  \end{tikzpicture}
 \end{frame}
 
 \begin{frame}
@@ -167,20 +181,6 @@
     \item difference between $\Box C$ and $P_{=1}C$, \mbox{e.g.}, no direct reduction from $S5_{\alc}$
       to Prob-$\alc^{01}$ possible
   \end{itemize}
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Reasoning in \el}
-  \el: restriction to constructors $\exists r.A$ and $\sqcap$
-  \begin{itemize}
-    \item turns out to be expressive enough in many cases (\mbox{e.g.} medical knowledge bases)
-    \item extensions: role hierarchies, fixpoint operators, $\bot$, $\dots$
-    \item polynomial reasoning
-    \item finite model property 
-    \item \emph{convex logic}: $C\sqsubseteq D_1\sqcup D_2$ implies $C\sqsubseteq D_1$ or $C\sqsubseteq D_2$
-  \end{itemize}
-  important observation: \emph{non-convex} extensions of \el are as hard as the corresponding variant of \alc.
 \end{frame}
 
 
@@ -288,6 +288,8 @@
   \begin{itemize}
     \item more careful analysis of statistical semantics
     \item how to convert from statistical to subjective semantics, \mbox{i.e.} how to get \emph{degree of belief} from statistical knowledge
+    \item Probabilistic DL-Lite, Horn $\mathcal{SHIQ}$, \dots
+    \item probabilistic query answering 
   \end{itemize}
 \end{frame}
 
